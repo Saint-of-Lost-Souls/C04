@@ -1,34 +1,29 @@
 #include <unistd.h>
 
-void	ft_putchar(char c)
-{
-	write(1, &c, 1);
-}
-
 void	ft_putnbr(int nb)
 {
-	unsigned int	i;
+	long int	nbl;
+	int			div;
+	int			mod;
+	char		modchar;
 
-	i = 0;
-	if (nb < 0)
+	nbl = nb;
+	if (nbl < 0)
 	{
-		ft_putchar('-'); // if 42 is less than 0, put -, i = -42
-		i = -nb;
+		nbl = nbl * -1;
+		write(1, "-", 1);
 	}
-	else
+	div = nbl / 10;
+	mod = nbl % 10;
+	if (div > 0)
 	{
-		i = nb;
+		ft_putnbr(div);
 	}
-	if (i > 9)
-	{
-		ft_putnbr(i / 10);
-	}
-	ft_putchar(i % 10 + 48);
+	modchar = mod + 48;
+	write(1, &modchar, 1);
 }
 
-int main()
+int	main(void)
 {
-    ft_putnbr(10);
-    return 0;
-
+	ft_putnbr(-2147483648);
 }
